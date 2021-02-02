@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Дмитрий Бронских](https://up.htmlacademy.ru/react/6/user/445873).
-* Наставник: [Иван Шалагин](https://htmlacademy.ru/profile/id386947).
+* Наставник: `Неизвестно`.
 
 ---
 
