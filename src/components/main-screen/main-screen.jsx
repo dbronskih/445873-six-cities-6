@@ -4,7 +4,8 @@ import OffersList from "../offers-list/offers-list";
 import {propTypesOffer} from "../../prop-types";
 
 const MainScreen = (props) => {
-  const {offersCount, offers} = props;
+  const {offers} = props;
+  const offersCount = offers.length;
 
   return (
     <div className="page page--gray page--main">
@@ -104,7 +105,6 @@ const MainScreen = (props) => {
 };
 
 MainScreen.propTypes = {
-  offersCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(
       PropTypes.shape(propTypesOffer)
   ).isRequired,

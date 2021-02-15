@@ -9,14 +9,13 @@ import PropertyScreen from "../property-screen/property-screen";
 import {propTypesOffer} from "../../prop-types";
 
 const App = (props) => {
-  const {offersCount, offers} = props;
+  const {offers} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
           <MainScreen
-            offersCount={offersCount}
             offers={offers}
           />
         </Route>
@@ -38,7 +37,6 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  offersCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(
       PropTypes.shape(propTypesOffer)
   ).isRequired,

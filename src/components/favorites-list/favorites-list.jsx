@@ -2,25 +2,14 @@ import React from 'react';
 import PropTypes from "prop-types";
 import FavoriteCard from "../favorite-card/favorite-card";
 import {propTypesOffer} from "../../prop-types";
+import offersGroupByCity from "../../helpers/offers-group-by-city";
 
-const FavoritesList = (props) => {
-  const {offers} = props;
+const FavoritesList = ({offers}) => {
+  offers = offersGroupByCity(offers.filter(({isFavorite}) => isFavorite));
 
-  const content = [];
-  const sortOffers = {};
-  offers.map((order) => {
-    const {isFavorite, city} = order;
-    if (isFavorite) {
-      if (!sortOffers[city.name]) {
-        sortOffers[city.name] = [];
-      }
-      sortOffers[city.name].push(order);
-    }
-  });
-
-  Object.keys(sortOffers).map((order) => {
-    const data = sortOffers[order];
-    const element = <li key={`order-${order}`} className="favorites__locations-items">
+  return Object.keys(offers).map((order) => {
+    const data = offers[order];
+    return <li key={`order-${order}`} className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
           <a className="locations__item-link" href="#">
@@ -34,11 +23,7 @@ const FavoritesList = (props) => {
         })}
       </div>
     </li>;
-
-    content.push(element);
   });
-
-  return content;
 };
 
 FavoritesList.propTypes = {

@@ -2,15 +2,30 @@ import PropTypes from "prop-types";
 
 const propTypesOffer = {
   bedrooms: PropTypes.number.isRequired,
-  city: PropTypes.object.isRequired,
+  city: PropTypes.shape({
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+  }).isRequired,
   description: PropTypes.string.isRequired,
-  goods: PropTypes.array.isRequired,
-  host: PropTypes.object.isRequired,
+  goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+  host: PropTypes.shape({
+    avatarUrl: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    isPro: PropTypes.bool.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
   id: PropTypes.number.isRequired,
-  images: PropTypes.array.isRequired,
+  images: PropTypes.arrayOf(PropTypes.string).isRequired,
   isFavorite: PropTypes.bool.isRequired,
   isPremium: PropTypes.bool.isRequired,
-  location: PropTypes.object.isRequired,
+  location: PropTypes.shape({
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired,
+  }).isRequired,
   maxAdults: PropTypes.number.isRequired,
   previewImage: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
