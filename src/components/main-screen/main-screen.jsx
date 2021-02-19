@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list";
 import {propTypesOffer} from "../../prop-types";
+import Map from "../map/map";
 
 const MainScreen = (props) => {
   const {offers} = props;
@@ -95,7 +96,9 @@ const MainScreen = (props) => {
 
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map offers={offers} city={offers[0].city}/>
+              </section>
             </div>
           </div>
         </div>
