@@ -6,10 +6,10 @@ import NotFoundScreen from "../not-found-screen/not-found-screen";
 import LoginScreen from "../login-screen/login-screen";
 import FavoritesScreen from "../favorites-screen/favorites-screen";
 import PropertyScreen from "../property-screen/property-screen";
-import {propTypesOffer} from "../../prop-types";
+import {propTypesComment, propTypesOffer} from "../../prop-types";
 
 const App = (props) => {
-  const {offers} = props;
+  const {offers, comments} = props;
 
   return (
     <BrowserRouter>
@@ -27,7 +27,12 @@ const App = (props) => {
             offers={offers}
           />
         </Route>
-        <Route exact path="/offer/:id" component={PropertyScreen} />
+        <Route exact path="/offer/:id">
+          <PropertyScreen
+            offers={offers}
+            comments={comments}
+          />
+        </Route>
         <Route>
           <NotFoundScreen />
         </Route>
@@ -39,6 +44,9 @@ const App = (props) => {
 App.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.shape(propTypesOffer)
+  ).isRequired,
+  comments: PropTypes.arrayOf(
+      PropTypes.shape(propTypesComment)
   ).isRequired,
 };
 
