@@ -2,20 +2,20 @@ import React, {useState} from 'react';
 import PropTypes from "prop-types";
 import PlaceCard from "../place-card/place-card";
 import {propTypesOffer} from "../../prop-types";
-import {MAIN_OFFERS} from "../../helpers/constants";
+import {NEARBY_OFFERS} from "../../helpers/constants";
 
-const OffersList = (props) => {
+const NearbyList = (props) => {
   const {offers} = props;
   const [, setActiveOffer] = useState(null);
 
   return (
     <>
-      <div className="cities__places-list places__list tabs__content">
+      <div className="near-places__list places__list">
         {offers.map((offer) =>
           <PlaceCard
             key={`offer-${offer.id}`}
             offer={offer}
-            cardType={MAIN_OFFERS}
+            cardType={NEARBY_OFFERS}
             onActive={() => {
               setActiveOffer(offer.id);
             }}
@@ -23,14 +23,13 @@ const OffersList = (props) => {
         )}
       </div>
     </>
-
   );
 };
 
-OffersList.propTypes = {
+NearbyList.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.shape(propTypesOffer),
   ).isRequired,
 };
 
-export default OffersList;
+export default NearbyList;
