@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import PropTypes from "prop-types";
 import PlaceCard from "../place-card/place-card";
 import {propTypesOffer} from "../../prop-types";
-import {NEARBY_OFFERS} from "../../helpers/constants";
+import {CardTypes} from "../../helpers/constants";
 
 const NearbyList = (props) => {
   const {offers} = props;
@@ -15,7 +15,7 @@ const NearbyList = (props) => {
           <PlaceCard
             key={`offer-${offer.id}`}
             offer={offer}
-            cardType={NEARBY_OFFERS}
+            cardType={CardTypes.NEARBY_OFFERS}
             onActive={() => {
               setActiveOffer(offer.id);
             }}

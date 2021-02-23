@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {propTypesOffer} from "../../prop-types";
 import offersGroupByCity from "../../helpers/offers-group-by-city";
 import PlaceCard from "../place-card/place-card";
-import {FAVORITES_OFFERS} from "../../helpers/constants";
+import {CardTypes} from "../../helpers/constants";
 
 const FavoritesList = ({offers}) => {
   offers = offersGroupByCity(offers.filter(({isFavorite}) => isFavorite));
@@ -22,7 +22,7 @@ const FavoritesList = ({offers}) => {
         {data.map((offer) => <PlaceCard
           key={`offer-${offer.id}`}
           onActive={()=>{}}
-          cardType={FAVORITES_OFFERS}
+          cardType={CardTypes.FAVORITES_OFFERS}
           offer={offer}
         />
         )}

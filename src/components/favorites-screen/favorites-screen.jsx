@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import FavoritesList from "../favorites-list/favorites-list";
 import {propTypesOffer} from "../../prop-types";
+import connect from "react-redux/es/connect/connect";
 
 const FavoritesScreen = (props) => {
   const {offers} = props;
@@ -57,4 +58,10 @@ FavoritesScreen.propTypes = {
   ).isRequired,
 };
 
-export default FavoritesScreen;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+});
+
+export {FavoritesScreen};
+export default connect(mapStateToProps)(FavoritesScreen);
+
