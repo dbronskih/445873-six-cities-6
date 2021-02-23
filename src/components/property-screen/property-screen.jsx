@@ -6,6 +6,7 @@ import NearbyList from "../nearby-list/nearby-list";
 import PropTypes from "prop-types";
 import propTypesOffer from "../../prop-types/propTypesOffer";
 import propTypesComment from "../../prop-types/propTypesComment";
+import connect from "react-redux/es/connect/connect";
 
 const PropertyScreen = (props) => {
   const {offers, comments} = props;
@@ -184,4 +185,10 @@ PropertyScreen.propTypes = {
   ).isRequired,
 };
 
-export default PropertyScreen;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+  comments: state.comments,
+});
+
+export {PropertyScreen};
+export default connect(mapStateToProps)(PropertyScreen);

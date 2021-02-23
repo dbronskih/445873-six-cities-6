@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import PropTypes from "prop-types";
 import PlaceCard from "../place-card/place-card";
 import {propTypesOffer} from "../../prop-types";
-import {MAIN_OFFERS} from "../../helpers/constants";
+import {CardTypes} from "../../helpers/constants";
 
 const OffersList = (props) => {
   const {offers} = props;
@@ -15,7 +15,7 @@ const OffersList = (props) => {
           <PlaceCard
             key={`offer-${offer.id}`}
             offer={offer}
-            cardType={MAIN_OFFERS}
+            cardType={CardTypes.MAIN_OFFERS}
             onActive={() => {
               setActiveOffer(offer.id);
             }}

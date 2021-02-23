@@ -1,4 +1,5 @@
-import {FAVORITES_OFFERS, MAIN_OFFERS, NEARBY_OFFERS} from "./constants";
+import {CardTypes} from "./constants";
+const {FAVORITES_OFFERS, MAIN_OFFERS, NEARBY_OFFERS} = CardTypes;
 
 const cardsSettings = {
   [MAIN_OFFERS]: {
