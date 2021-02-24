@@ -1,12 +1,13 @@
 import {ActionType} from './actions';
 import Offers from '../mocks/offers';
 import Comments from '../mocks/comments';
-import {Cities} from '../helpers/constants';
+import {Cities, SortOrders} from '../helpers/constants';
 
 const initialState = {
   currentCityName: Cities.PARIS,
   offers: Offers,
   comments: Comments,
+  sortOrder: SortOrders.POPULAR,
 };
 
 const reducer = (state = initialState, action) => {
@@ -20,6 +21,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         offers: action.payload,
+      };
+    case ActionType.SET_SORT_ORDER:
+      return {
+        ...state,
+        sortOrder: action.payload
       };
     default:
       return state;

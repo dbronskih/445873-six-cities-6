@@ -5,7 +5,7 @@ import {propTypesOffer} from "../../prop-types";
 import "leaflet/dist/leaflet.css";
 import offerCoordinates from "../../helpers/offer-coordinates";
 
-const Map = ({offers, city}) => {
+const Map = ({offers, city, activeOfferId}) => {
   const mapRef = useRef();
   const icon = leaflet.icon({
     iconUrl: `/img/pin.svg`,
@@ -40,6 +40,19 @@ const Map = ({offers, city}) => {
     };
   }, [offers, city]);
 
+  useEffect(() => {
+    const pins = [...mapRef.current.getPane(`markerPane`).children];
+
+    pins.forEach((pin) => {
+      pin.src = `./img/pin.svg`;
+    });
+
+    if (activeOfferId) {
+      const activeIndex = offers.findIndex((offer) => offer.id === activeOfferId);
+      pins[activeIndex].src = `./img/pin-active.svg`;
+    }
+  }, [activeOfferId]);
+
   return (
     <div id="map" style={{height: `100%`}} ref={mapRef}/>
   );
@@ -56,6 +69,7 @@ Map.propTypes = {
       zoom: PropTypes.number.isRequired,
     }).isRequired,
   }).isRequired,
+  activeOfferId: PropTypes.number,
 };
 
 export default Map;
