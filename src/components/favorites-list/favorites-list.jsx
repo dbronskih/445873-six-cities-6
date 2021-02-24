@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import FavoriteCard from "../favorite-card/favorite-card";
 import {propTypesOffer} from "../../prop-types";
 import offersGroupByCity from "../../helpers/offers-group-by-city";
+import PlaceCard from "../place-card/place-card";
+import {CardTypes} from "../../helpers/constants";
 
 const FavoritesList = ({offers}) => {
   offers = offersGroupByCity(offers.filter(({isFavorite}) => isFavorite));
@@ -18,9 +19,13 @@ const FavoritesList = ({offers}) => {
         </div>
       </div>
       <div className="favorites__places">
-        {data.map((offer) => {
-          return <FavoriteCard key={`offer-${offer.id}`} offer={offer}/>;
-        })}
+        {data.map((offer) => <PlaceCard
+          key={`offer-${offer.id}`}
+          onActive={()=>{}}
+          cardType={CardTypes.FAVORITES_OFFERS}
+          offer={offer}
+        />
+        )}
       </div>
     </li>;
   });

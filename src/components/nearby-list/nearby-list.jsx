@@ -4,18 +4,18 @@ import PlaceCard from "../place-card/place-card";
 import {propTypesOffer} from "../../prop-types";
 import {CardTypes} from "../../helpers/constants";
 
-const OffersList = (props) => {
+const NearbyList = (props) => {
   const {offers} = props;
   const [, setActiveOffer] = useState(null);
 
   return (
     <>
-      <div className="cities__places-list places__list tabs__content">
+      <div className="near-places__list places__list">
         {offers.map((offer) =>
           <PlaceCard
             key={`offer-${offer.id}`}
             offer={offer}
-            cardType={CardTypes.MAIN_OFFERS}
+            cardType={CardTypes.NEARBY_OFFERS}
             onActive={() => {
               setActiveOffer(offer.id);
             }}
@@ -23,14 +23,13 @@ const OffersList = (props) => {
         )}
       </div>
     </>
-
   );
 };
 
-OffersList.propTypes = {
+NearbyList.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.shape(propTypesOffer),
   ).isRequired,
 };
 
-export default OffersList;
+export default NearbyList;
