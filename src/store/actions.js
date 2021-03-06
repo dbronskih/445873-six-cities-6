@@ -1,7 +1,9 @@
 export const ActionType = {
   SET_CITY: `MAIN/SET_CITY`,
-  SET_OFFERS: `MAIN/SET_OFFERS`,
   SET_SORT_ORDER: `MAIN/SET_SORT_ORDER`,
+
+  LOAD_OFFERS: `DATA/LOAD_OFFERS`,
+  REQUIRED_AUTHORIZATION: `USER/REQUIRED_AUTHORIZATION`,
 };
 
 export const ActionCreator = {
@@ -9,12 +11,16 @@ export const ActionCreator = {
     type: ActionType.SET_CITY,
     payload: cityName,
   }),
-  setOffers: (offers) => ({
-    type: ActionType.SET_OFFERS,
+  loadOffers: (offers) => ({
+    type: ActionType.LOAD_OFFERS,
     payload: offers,
   }),
   setSortOrder: (sortOrder) => ({
     type: ActionType.SET_SORT_ORDER,
     payload: sortOrder,
-  })
+  }),
+  requireAuthorization: (status) => ({
+    type: ActionType.REQUIRED_AUTHORIZATION,
+    payload: status,
+  }),
 };

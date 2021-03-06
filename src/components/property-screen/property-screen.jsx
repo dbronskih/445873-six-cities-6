@@ -186,8 +186,8 @@ PropertyScreen.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
-  comments: state.comments,
+  offers: state.offers.entities,
+  comments: state.offers.comments,
 });
 
 export {PropertyScreen};

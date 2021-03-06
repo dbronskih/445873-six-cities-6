@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/actions';
 import PropTypes from "prop-types";
@@ -9,6 +9,8 @@ import CitiesList from "../cities-list/cities-list";
 import SortSelect from "../sort-select/sort-select";
 import {SortOrders} from "../../helpers/constants";
 import offersInCitySelector from "../../helpers/offers-in-city-selector";
+import {fetchOffers} from "../../store/api-actions";
+import Loading from "../loading/loading";
 
 const MainScreen = (props) => {
   const {
@@ -17,6 +19,8 @@ const MainScreen = (props) => {
     onSetCity,
     sortOrder,
     onSetSortOrder,
+    isOffersLoaded,
+    onLoadOffers,
   } = props;
 
   const offersCount = offers.length;
@@ -26,6 +30,13 @@ const MainScreen = (props) => {
   const onChangeActiveOffer = (id) => {
     setActiveOfferId(id);
   };
+
+  useEffect(() => {
+    if (!isOffersLoaded) {
+      onLoadOffers();
+    }
+  }, [isOffersLoaded]
+  );
 
   return (
     <div className="page page--gray page--main">
@@ -52,37 +63,45 @@ const MainScreen = (props) => {
         </div>
       </header>
 
-      <main className="page__main page__main--index">
-        <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
+      {!isOffersLoaded
+        ?
+        <Loading/>
+        :
+        (
+          <main className="page__main page__main--index">
+            <h1 className="visually-hidden">Cities</h1>
+            <div className="tabs">
+              <section className="locations container">
 
-            <CitiesList
-              currentCityName={currentCityName}
-              onSetCity={onSetCity}
-            />
+                <CitiesList
+                  currentCityName={currentCityName}
+                  onSetCity={onSetCity}
+                />
 
-          </section>
-        </div>
-        <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersCount} places to stay in {currentCityName}</b>
-
-              <SortSelect order={sortOrder} onSetOrder={onSetSortOrder}/>
-
-              <OffersList offers={offers} onChangeActiveOffer={onChangeActiveOffer}/>
-
-            </section>
-            <div className="cities__right-section">
-              <section className="cities__map map">
-                {offersCount && <Map offers={offers} city={offers[0].city} activeOfferId={activeOfferId} />}
               </section>
             </div>
-          </div>
-        </div>
-      </main>
+            <div className="cities">
+              <div className="cities__places-container container">
+                <section className="cities__places places">
+                  <h2 className="visually-hidden">Places</h2>
+                  <b className="places__found">{offersCount} places to stay in {currentCityName}</b>
+
+                  <SortSelect order={sortOrder} onSetOrder={onSetSortOrder}/>
+
+                  <OffersList offers={offers} onChangeActiveOffer={onChangeActiveOffer}/>
+
+                </section>
+                <div className="cities__right-section">
+                  <section className="cities__map map">
+                    {offersCount && <Map offers={offers} city={offers[0].city} activeOfferId={activeOfferId} />}
+                  </section>
+                </div>
+              </div>
+            </div>
+          </main>
+        )}
+
+
     </div>
   );
 };
@@ -94,16 +113,22 @@ MainScreen.propTypes = {
   currentCityName: PropTypes.string.isRequired,
   onSetCity: PropTypes.func.isRequired,
   sortOrder: PropTypes.oneOf(Object.values(SortOrders)),
-  onSetSortOrder: PropTypes.func
+  onSetSortOrder: PropTypes.func,
+  onLoadOffers: PropTypes.func,
+  isOffersLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   offers: offersInCitySelector(state),
   currentCityName: state.currentCityName,
   sortOrder: state.sortOrder,
+  isOffersLoaded: state.offers.isLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  onLoadOffers() {
+    dispatch(fetchOffers());
+  },
   onSetCity(cityName) {
     dispatch(ActionCreator.setCity(cityName));
   },

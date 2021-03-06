@@ -1,7 +1,7 @@
 import {SortOrders} from './constants';
 
 const offersInCitySelector = ({offers, currentCityName, sortOrder}) => {
-  offers = offers.filter(
+  offers = offers.entities.filter(
       ({city: {name}}) => name === currentCityName
   );
 
